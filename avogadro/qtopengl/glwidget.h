@@ -12,6 +12,7 @@
 #include <avogadro/qtgui/toolplugin.h>
 #include <avogadro/rendering/glrenderer.h>
 
+#include <QMetaObject>
 #include <QPointer>
 
 #if QT_VERSION >= 0x060000
@@ -197,6 +198,7 @@ protected:
 
 private:
   QPointer<QtGui::Molecule> m_molecule;
+  QMetaObject::Connection m_moleculeChangedConnection;
   QList<QtGui::ToolPlugin*> m_tools;
   QtGui::ToolPlugin* m_activeTool;
   QtGui::ToolPlugin* m_defaultTool;

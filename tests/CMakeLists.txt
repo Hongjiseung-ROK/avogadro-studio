@@ -61,3 +61,10 @@ endif()
 if(USE_OPENGL)
   add_subdirectory(rendering)
 endif()
+if(USE_QT AND USE_OPENGL)
+  add_executable(GLWidgetMoleculeObserversTest
+    qtopengl/glwidgetmoleculeobserverstest.cpp)
+  target_link_libraries(GLWidgetMoleculeObserversTest Avogadro::QtOpenGL)
+  add_test(NAME QtOpenGL-GLWidgetMoleculeObservers
+    COMMAND GLWidgetMoleculeObserversTest)
+endif()

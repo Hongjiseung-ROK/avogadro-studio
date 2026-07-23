@@ -42,8 +42,8 @@ GLWidget::~GLWidget() {}
 void GLWidget::setMolecule(QtGui::Molecule* mol)
 {
   clearScene();
-  if (m_molecule)
-    disconnect(m_molecule, nullptr, nullptr, nullptr);
+  disconnect(m_moleculeChangedConnection);
+  m_moleculeChangedConnection = {};
   m_molecule = mol;
   foreach (QtGui::ToolPlugin* tool, m_tools)
     tool->setMolecule(m_molecule);
@@ -51,9 +51,9 @@ void GLWidget::setMolecule(QtGui::Molecule* mol)
   if (m_molecule != nullptr) {
     // update properties like dipole rendering
     QTimer::singleShot(500, m_molecule, &QtGui::Molecule::update);
+    m_moleculeChangedConnection = connect(m_molecule, &QtGui::Molecule::changed,
+                                          this, &GLWidget::updateScene);
   }
-
-  connect(m_molecule, &QtGui::Molecule::changed, this, &GLWidget::updateScene);
 }
 
 QtGui::Molecule* GLWidget::molecule()
