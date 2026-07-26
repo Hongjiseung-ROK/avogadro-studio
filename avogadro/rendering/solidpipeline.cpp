@@ -206,6 +206,7 @@ void SolidPipeline::adjustOffset(const Camera& cam)
   } else if (project >= 21595.588) {
     offSet = 9.952 * project - 212865;
   }
+  d->firstStageShaders.bind();
   d->firstStageShaders.setUniformValue("uoffset", offSet);
 }
 

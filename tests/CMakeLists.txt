@@ -67,4 +67,13 @@ if(USE_QT AND USE_OPENGL)
   target_link_libraries(GLWidgetMoleculeObserversTest Avogadro::QtOpenGL)
   add_test(NAME QtOpenGL-GLWidgetMoleculeObservers
     COMMAND GLWidgetMoleculeObserversTest)
+
+  add_executable(GLRendererFirstFrameTest
+    qtopengl/glrendererfirstframetest.cpp)
+  target_link_libraries(GLRendererFirstFrameTest
+    Avogadro::QtOpenGL
+    GTest::gtest)
+  add_test(NAME QtOpenGL-GLRendererFirstFrame
+    COMMAND GLRendererFirstFrameTest)
+  set_tests_properties(QtOpenGL-GLRendererFirstFrame PROPERTIES TIMEOUT 15)
 endif()
